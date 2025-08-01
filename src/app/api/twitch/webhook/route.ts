@@ -13,6 +13,7 @@ export async function POST(req: Request) {
   if (messageType === "webhook_callback_verification") {
     const data = JSON.parse(body);
     return new Response(data.challenge);
+    return NextResponse.json(data.challenge);
   }
 
   if (messageType === "notification") {
