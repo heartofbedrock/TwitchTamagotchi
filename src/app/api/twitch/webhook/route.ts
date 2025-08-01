@@ -12,7 +12,7 @@ export async function POST(req: Request) {
   const messageType = req.headers.get("Twitch-Eventsub-Message-Type");
   if (messageType === "webhook_callback_verification") {
     const data = JSON.parse(body);
-    return NextResponse.json(data.challenge);
+    return new Response(data.challenge);
   }
 
   if (messageType === "notification") {
