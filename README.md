@@ -88,6 +88,8 @@ supabase status
 ```
 
 Copy `service_role key` and save it as `SUPABASE_PRIVATE_KEY` in `.env.local`
+Add your Twitch credentials (`TWITCH_CLIENT_ID`, `TWITCH_CLIENT_SECRET`, `TWITCH_CHANNEL_ID`, and `TWITCH_WEBHOOK_SECRET`) to `.env.local` if you plan to use Twitch integration.
+
 
 ### 6. Set up Inngest
 `npx inngest-cli@latest dev`
@@ -151,6 +153,12 @@ This will make sure no one user calls any API too many times and taking up all t
 - Create a new file `.env.prod` locally and fill in all the production-environment secrets. Remember to update `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` and `CLERK_SECRET_KEY` by copying secrets from Clerk's production instance -`cat .env.prod | fly secrets import` to upload secrets.
 
 If you have questions, join [AI Stack devs](https://discord.gg/TsWCNVvRP5) and find me in #ai-tamago channel.
+### Deploying on Railway
+1. Install the Railway CLI and run `railway init` in this project.
+2. Add all env variables from `.env.local.example` in the Railway dashboard.
+3. Set `TWITCH_WEBHOOK_SECRET` to the same value used when creating your EventSub subscription.
+4. Deploy with `railway up` and set your Twitch webhook callback URL to `https://<your-app>.up.railway.app/api/twitch/webhook`.
+
 
 ## Other Resources 
 - [Adding auth with Clerk](https://clerk.com/docs/quickstarts/nextjs) - takes < 5mins
